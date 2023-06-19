@@ -37,7 +37,7 @@
 
     function buscarpk(id) {
       console.log("entro");
-      let url = 'https://pokeapi.co/api/v2/pokemon/' + Math.floor(Math.random() * 1001) + '/';
+      let url = 'https://pokeapi.co/api/v2/pokemon/' + Math.floor(Math.random() * 1010) + '/';
       let a = document.getElementById('a' + id);
       a.style.backgroundColor=null;
       var req = new XMLHttpRequest();
@@ -46,8 +46,11 @@
         if (req.readyState == 4 && req.status == 200) {  // check for success
           jsonObject = JSON.parse(req.responseText);
           console.log(jsonObject);
-          
-          a.innerHTML = "<h1>" + jsonObject.forms[0].name+"<span style='display:none' name='hp'> hp:" + jsonObject.stats[0].base_stat + "</span><h1>";
+          tipo=jsonObject.types[0].type.name;
+          if(typeof jsonObject.types[1]!= "undefined"){
+            tipo+="/"+jsonObject.types[1].type.name
+          }
+          a.innerHTML = "<h1>" + jsonObject.forms[0].name+ " : " + tipo +" <span style='display:none' name='hp'> hp:" + jsonObject.stats[0].base_stat + "</span><h1>";
           a.innerHTML += "<img src='" + jsonObject.sprites.front_default + "' />";
           pks[id] = jsonObject;
 
