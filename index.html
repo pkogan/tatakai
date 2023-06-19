@@ -37,7 +37,7 @@
 
     function buscarpk(id) {
       console.log("entro");
-      let url = 'https://pokeapi.co/api/v2/pokemon/' + Math.floor(Math.random() * 1010) + '/';
+      let url = 'https://pokeapi.co/api/v2/pokemon/' + Math.floor(Math.random() * 500) + '/';
       let a = document.getElementById('a' + id);
       a.style.backgroundColor=null;
       var req = new XMLHttpRequest();
@@ -51,7 +51,8 @@
             tipo+="/"+jsonObject.types[1].type.name
           }
           a.innerHTML = "<h1>" + jsonObject.forms[0].name+ " : " + tipo +" <span style='display:none' name='hp'> hp:" + jsonObject.stats[0].base_stat + "</span><h1>";
-          a.innerHTML += "<img src='" + jsonObject.sprites.front_default + "' />";
+          //a.innerHTML += "<img src='" + jsonObject.sprites.front_default + "' />";
+          a.innerHTML += "<img style='height:200px' src='" + jsonObject.sprites.other.home.front_default + "' />";
           pks[id] = jsonObject;
 
         }
@@ -81,7 +82,7 @@
     <br/>
     <br/>
     <br/>
-    <button onclick="buscarpk(1);buscarpk(2)"><h4> Otro TATAKAI </h4></button>
+    <button onclick="buscarpk(1);buscarpk(2)"><h4> TATAKAI </h4></button>
     <p>Desarrollado por Sabi</p>
   </footer>
 
