@@ -27,6 +27,7 @@
       }
       console.log("1:"+color[1]+" 2:"+color[2]);
       document.getElementById("a"+id).style.backgroundColor=color[id];
+      document.getElementById("poke").style.display="inline";
       var hps = document.getElementsByName('hp');
       for (var item in hps) {
                    hps[item].style.display = 'inline';
@@ -37,6 +38,7 @@
 
     function buscarpk(id) {
       console.log("entro");
+      document.getElementById("poke").style.display="none";
       let url = 'https://pokeapi.co/api/v2/pokemon/' + Math.floor(Math.random() * 500) + '/';
       let a = document.getElementById('a' + id);
       a.style.backgroundColor=null;
@@ -79,9 +81,7 @@
   </div>
   <hr />
   <footer class="fixed-bottom text-center">
-    <br/>
-    <br/>
-    <button style="border: 0px solid #b4b4e0;
+    <button id="poke" style="display:none;border: 0px solid #b4b4e0;
     border-radius: 100px;width:100px ; height: 100px;background: url('img/Pokeball.png') no-repeat; background-size: 100px;" onclick="buscarpk(1);buscarpk(2)"><br/><br/><br/> TATAKAI </button>
     <p>Desarrollado por Sabi</p>
   </footer>
