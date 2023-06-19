@@ -1,0 +1,5 @@
+*.php
+nbproject/project.properties
+nbproject/project.xml
+nbproject/private/private.properties
+nbproject/private/private.xml

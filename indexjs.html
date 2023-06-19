@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <title>TATAKAI</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+</head>
+
+
+
+<body style="text-align: center" onload="buscarpk(1);buscarpk(2)">
+  <script>
+    pks = new Array();
+
+    function verhp(id) {
+      let fuerza=new Array();
+      let color= new Array();
+      fuerza[1] = pks[1].stats[0].base_stat;
+      fuerza[2] = pks[2].stats[0].base_stat;
+      if (fuerza[1] > fuerza[2]) {
+        color[1] = 'green';
+        color[2] = 'red';
+      } else if(fuerza[1] < fuerza[2]){
+        color[2] = 'green';
+        color[1] = 'red';
+      } else {
+        color[2] = 'orange';
+        color[1] = 'orange';
+      }
+      console.log("1:"+color[1]+" 2:"+color[2]);
+      document.getElementById("a"+id).style.backgroundColor=color[id];
+      var hps = document.getElementsByName('hp');
+      for (var item in hps) {
+                   hps[item].style.display = 'inline';
+      }
+
+
+    }
+
+    function buscarpk(id) {
+      console.log("entro");
+      let url = 'https://pokeapi.co/api/v2/pokemon/' + Math.floor(Math.random() * 1001) + '/';
+      let a = document.getElementById('a' + id);
+      a.style.backgroundColor=null;
+      var req = new XMLHttpRequest();
+      req.open("GET", url);
+      req.onreadystatechange = function () {    // need eventhandler since our call is async
+        if (req.readyState == 4 && req.status == 200) {  // check for success
+          jsonObject = JSON.parse(req.responseText);
+          console.log(jsonObject);
+          
+          a.innerHTML = "<h1>" + jsonObject.forms[0].name+"<span style='display:none' name='hp'> hp:" + jsonObject.stats[0].base_stat + "</span><h1>";
+          a.innerHTML += "<img src='" + jsonObject.sprites.front_default + "' />";
+          pks[id] = jsonObject;
+
+        }
+      };
+      req.send();
+    }
+  </script>
+
+  <div class="container-fluid ">
+
+    <h1>¿Quien Gana?</h1>
+    <hr />
+
+    <a id="a1" onclick="verhp(1)">
+      <h1>Cargando!!!</h1>
+    </a>
+    <hr />
+
+
+    <a id="a2" onclick="verhp(2)">
+      <h1></h1>
+    </a>
+
+  </div>
+  <hr />
+  <footer class="fixed-bottom text-center">
+    <button onclick="buscarpk(1);buscarpk(2)"> Otro TATAKAI</button>
+    <p>Desarrollado por Sabi</p>
+  </footer>
+
+</body>
+
+</html>
